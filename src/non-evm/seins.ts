@@ -4,9 +4,9 @@ import DotSei from '@dotnames/dotseijs'
 
 export async function getAddressSeiNS(domainName: string, providerUrl: string) {
   try {
-    const cosmWasmClient = await getCosmWasmClient('https://sei-rpc.polkachu.com/');
+    const client = await getCosmWasmClient('https://sei-rpc.polkachu.com/');
     const dotSei = new DotSei({
-      cosmWasmClient,
+      client,
       networkId: 'pacific-1',
     });
     const address = await dotSei.name(domainName).getAddress();
@@ -18,9 +18,9 @@ export async function getAddressSeiNS(domainName: string, providerUrl: string) {
 
 export async function getNameSeiNS(address: string, providerUrl: string) {
   try {
-    const cosmWasmClient = await getCosmWasmClient(providerUrl);
+    const client = await getCosmWasmClient(providerUrl);
     const dotSei = new DotSei({
-      cosmWasmClient,
+      client,
       networkId: 'pacific-1',
     });
     const name = await dotSei.getName(address);

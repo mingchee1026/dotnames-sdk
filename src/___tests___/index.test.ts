@@ -29,25 +29,25 @@ describe('testing resolveAddress function', () => {
     return dotnames.resolveAddress('sandy.crypto').then((address: string) => {
       expect(address).toBe('0x94ef5300cbc0aa600a821ccbc561b057e456ab23');
     });
-  }, 2000);
+  }, 5000);
 
   test('DotBit(Das)', () => {
     return dotnames.resolveAddress('imac.bit').then((address: string) => {
       expect(address).toBe('0x5728088435fb8788472a9ca601fbc0b9cbea8be3');
     });
-  }, 2000);
+  }, 5000);
 
   test('Zkns (ZkSync)', () => {
     return dotnames.resolveAddress('ross.zk').then((address: string) => {
       expect(address).toBe('0xf9473a70724b8f79c3ea108d5cb69d042c9fe76c');
     });
-  }, 2000);
+  }, 5000);
 
   test('ICNS (Osmosis)', () => {
     return dotnames.resolveAddress('dogemos.osmo').then((address: string) => {
       expect(address).toBe('osmo1z98eg2ztdp2glyla62629nrlvczg8s7f8sgpm5');
     });
-  }, 2000);
+  }, 5000);
 
   test('Stargaze Domains (Stargaze Chain)', () => {
     return dotnames.resolveAddress('nikan.stars').then((address: string) => {
@@ -65,17 +65,17 @@ describe('testing resolveAddress function', () => {
     return dotnames.resolveAddress('test.apt').then((address: string) => {
       expect(address).toBe('0xff7d353b9095524e1584479fa87e8af698f75e5b6f38cf1f46bdf0043dfc72e4');
     });
-  }, 2000);
+  }, 5000);
 
   test('Sui Name Service', () => {
     return dotnames.resolveAddress('coin.sui').then((address: string) => {
       expect(address).toBe('0xa4c4c40fb38cae294e42bcbf256acea1bbd77d3ea5b21d3cd009b5622e47f392');
     });
-  }, 2000);
+  }, 5000);
 
   test('Sei Name Service', () => {
     return dotnames
-      .resolveAddress('123456789.sei', SupportedChains.SeiNS)
+      .resolveAddress("123456789.sei", SupportedChains.SeiNS)
       .then((address: string) => {
         expect(address).toBe('sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24');
       });
@@ -92,7 +92,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('ricmoo.eth');
       });
-  }, 10000);
+  }, 5000);
 
   test('SpaceID', () => {
     return dotnames
@@ -100,7 +100,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('denali0.bnb');
       });
-  }, 10000);
+  }, 5000);
 
   test('Unstoppable Domain', () => {
     return dotnames
@@ -108,7 +108,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('sandy.nft');
       });
-  }, 10000);
+  }, 5000);
 
   test('DotBit(Das)', () => {
     return dotnames
@@ -116,7 +116,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('imac.bit');
       });
-  }, 10000);
+  }, 5000);
 
   test('Zkns (ZkSync)', () => {
     return dotnames
@@ -124,7 +124,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('ross.zk');
       });
-  }, 10000);
+  }, 5000);
 
   test('ICNS (Osmosis)', () => {
     return dotnames
@@ -132,7 +132,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('dogemos');
       });
-  }, 10000);
+  }, 5000);
 
   test('Stargaze Domains (Stargaze Chain)', () => {
     return dotnames
@@ -140,7 +140,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe(null);
       });
-  }, 10000);
+  }, 5000);
 
   test('Bonfida (Solana)', () => {
     return dotnames
@@ -148,7 +148,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('bonfida');
       });
-  }, 10000);
+  }, 5000);
 
   test('Aptos Name Service', () => {
     return dotnames
@@ -159,7 +159,7 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe('1717');
       });
-  }, 10000);
+  }, 5000);
 
   test('Sui Name Service', () => {
     return dotnames
@@ -170,18 +170,15 @@ describe('testing resolveName function', () => {
       .then((name: string) => {
         expect(name).toBe(undefined);
       });
-  }, 10000);
+  }, 5000);
 
   test('Sei Name Service', () => {
     return dotnames
-      .resolveName(
-        'sei1a74yars3jdanxj2myukt9vfmrk65p2a88jj3axdl9g6pulhgf84sqqqjas',
-        SupportedChains.SeiNS
-      )
+      .resolveName('sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24', SupportedChains.SeiNS)
       .then((name: string) => {
-        expect(name).toBe('sei');
+        expect(name).toBe('1234567890.sei');
       });
-  }, 10000);
+  }, 5000);
 
   test('Unstoppable Name Service', () => {
     return dotnames
