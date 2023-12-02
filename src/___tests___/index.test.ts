@@ -1,11 +1,11 @@
 import { DotNamesSDK } from '../index';
-import { SupportedChains } from '../types';
+import {  SupportedNS } from '../types';
 import { detectNameService } from '../utils/detectNameService';
 
 describe('testing detect nameservice function', () => {
   test('DetectNameService', () => {
     return detectNameService('alice.eth').then((result) => {
-      expect(result).toBe(SupportedChains.ENS);
+      expect(result).toBe(SupportedNS.ENS);
     });
   });
 });
@@ -13,7 +13,8 @@ describe('testing detect nameservice function', () => {
 describe('testing resolveAddress function', () => {
   const dotnames = new DotNamesSDK();
 
-  test('ENS', () => {
+  test('ENS', () => {  const dotnames = new DotNamesSDK(); 
+
     return dotnames.resolveAddress('alice.eth').then((address: string) => {
       expect(address).toBe('0xcd2E72aEBe2A203b84f46DEEC948E6465dB51c75');
     });
@@ -74,11 +75,9 @@ describe('testing resolveAddress function', () => {
   }, 5000);
 
   test('Sei Name Service', () => {
-    return dotnames
-      .resolveAddress("123456789.sei", SupportedChains.SeiNS)
-      .then((address: string) => {
-        expect(address).toBe('sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24');
-      });
+    return dotnames.resolveAddress('123456789.sei', SupportedNS.SeiNS).then((address: string) => {
+      expect(address).toBe('sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24');
+    });
   }, 2000);
 
 });
@@ -87,8 +86,9 @@ describe('testing resolveName function', () => {
   const dotnames = new DotNamesSDK();
 
   test('ENS', () => {
+      const dotnames = new DotNamesSDK();
     return dotnames
-      .resolveName('0x5555763613a12D8F3e73be831DFf8598089d3dCa', SupportedChains.ENS)
+      .resolveName('0x5555763613a12D8F3e73be831DFf8598089d3dCa', SupportedNS.ENS)
       .then((name: string) => {
         expect(name).toBe('ricmoo.eth');
       });
@@ -96,7 +96,7 @@ describe('testing resolveName function', () => {
 
   test('SpaceID', () => {
     return dotnames
-      .resolveName('0x5242333D36A31f9253d8A360e20e622C635Bd74c', SupportedChains.SpaceId)
+      .resolveName('0x5242333D36A31f9253d8A360e20e622C635Bd74c', SupportedNS.SpaceId)
       .then((name: string) => {
         expect(name).toBe('denali0.bnb');
       });
@@ -104,7 +104,7 @@ describe('testing resolveName function', () => {
 
   test('Unstoppable Domain', () => {
     return dotnames
-      .resolveName('0x94ef5300cbc0aa600a821ccbc561b057e456ab23', SupportedChains.UnstoppableDomains)
+      .resolveName('0x94ef5300cbc0aa600a821ccbc561b057e456ab23', SupportedNS.UnstoppableDomains)
       .then((name: string) => {
         expect(name).toBe('sandy.nft');
       });
@@ -112,7 +112,7 @@ describe('testing resolveName function', () => {
 
   test('DotBit(Das)', () => {
     return dotnames
-      .resolveName('0x5728088435fb8788472a9ca601fbc0b9cbea8be3', SupportedChains.DotBit)
+      .resolveName('0x5728088435fb8788472a9ca601fbc0b9cbea8be3', SupportedNS.DotBit)
       .then((name: string) => {
         expect(name).toBe('imac.bit');
       });
@@ -120,7 +120,7 @@ describe('testing resolveName function', () => {
 
   test('Zkns (ZkSync)', () => {
     return dotnames
-      .resolveName('0xf9473a70724b8f79c3ea108d5cb69d042c9fe76c', SupportedChains.Zkns)
+      .resolveName('0xf9473a70724b8f79c3ea108d5cb69d042c9fe76c', SupportedNS.Zkns)
       .then((name: string) => {
         expect(name).toBe('ross.zk');
       });
@@ -128,7 +128,7 @@ describe('testing resolveName function', () => {
 
   test('ICNS (Osmosis)', () => {
     return dotnames
-      .resolveName('osmo1z98eg2ztdp2glyla62629nrlvczg8s7f8sgpm5', SupportedChains.ICNS)
+      .resolveName('osmo1z98eg2ztdp2glyla62629nrlvczg8s7f8sgpm5', SupportedNS.ICNS)
       .then((name: string) => {
         expect(name).toBe('dogemos');
       });
@@ -136,7 +136,7 @@ describe('testing resolveName function', () => {
 
   test('Stargaze Domains (Stargaze Chain)', () => {
     return dotnames
-      .resolveName('stars1myec2z2wjpkhmf8tlhkzcjck04w25sc6ymhplz', SupportedChains.StargazeDomains)
+      .resolveName('stars1myec2z2wjpkhmf8tlhkzcjck04w25sc6ymhplz', SupportedNS.StargazeDomains)
       .then((name: string) => {
         expect(name).toBe(null);
       });
@@ -144,7 +144,7 @@ describe('testing resolveName function', () => {
 
   test('Bonfida (Solana)', () => {
     return dotnames
-      .resolveName('Crf8hzfthWGbGbLTVCiqRqV5MVnbpHB1L9KQMd6gsinb', SupportedChains.Bonfida)
+      .resolveName('Crf8hzfthWGbGbLTVCiqRqV5MVnbpHB1L9KQMd6gsinb', SupportedNS.Bonfida)
       .then((name: string) => {
         expect(name).toBe('bonfida');
       });
@@ -154,7 +154,7 @@ describe('testing resolveName function', () => {
     return dotnames
       .resolveName(
         '0xff7d353b9095524e1584479fa87e8af698f75e5b6f38cf1f46bdf0043dfc72e4',
-        SupportedChains.AptosNs
+        SupportedNS.AptosNs
       )
       .then((name: string) => {
         expect(name).toBe('1717');
@@ -165,7 +165,7 @@ describe('testing resolveName function', () => {
     return dotnames
       .resolveName(
         '0x175a95aa39e8bb6eecb49692ec6f9705e4bfac24877dee331a00dd15a2012adf',
-        SupportedChains.AptosNs
+        SupportedNS.AptosNs
       )
       .then((name: string) => {
         expect(name).toBe(undefined);
@@ -174,7 +174,7 @@ describe('testing resolveName function', () => {
 
   test('Sei Name Service', () => {
     return dotnames
-      .resolveName('sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24', SupportedChains.SeiNS)
+      .resolveName('sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24', SupportedNS.SeiNS)
       .then((name: string) => {
         expect(name).toBe('1234567890.sei');
       });
@@ -182,7 +182,7 @@ describe('testing resolveName function', () => {
 
   test('Unstoppable Name Service', () => {
     return dotnames
-      .resolveName('0x94ef5300cbc0aa600a821ccbc561b057e456ab23', SupportedChains.UnstoppableDomains)
+      .resolveName('0x94ef5300cbc0aa600a821ccbc561b057e456ab23', SupportedNS.UnstoppableDomains)
       .then((name: string) => {
         expect(name).toBe('sandy.nft');
       });

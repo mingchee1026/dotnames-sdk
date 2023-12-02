@@ -1,4 +1,4 @@
-import { SupportedChains } from '../types';
+import { SupportedNS } from '../types';
 import extensionData from './extensionData.json';
 
 const extensionDataUrl = 'https://sow-sdk-support-9gw2zt6e4-0xdead-e0f.vercel.app/api/extension';
@@ -21,10 +21,10 @@ async function fetchExtensionData() {
   }
 }
 
-export async function detectNameService(domainName: String): Promise<SupportedChains> {
+export async function detectNameService(domainName: String): Promise<SupportedNS> {
   const extension = getExtensionFromDomain(domainName).toLowerCase();
   if (extension === '') {
-    return SupportedChains.None;
+    return SupportedNS.None;
   }
 
   const extensionMap = await fetchExtensionData();
@@ -32,26 +32,26 @@ export async function detectNameService(domainName: String): Promise<SupportedCh
 
   switch (domainServiceName) {
     case 'ENS':
-      return SupportedChains.ENS;
+      return SupportedNS.ENS;
     case 'SpaceId':
-      return SupportedChains.SpaceId;
+      return SupportedNS.SpaceId;
     case 'UnstoppableDomains':
-      return SupportedChains.UnstoppableDomains;
+      return SupportedNS.UnstoppableDomains;
     case 'DotBit':
-      return SupportedChains.DotBit;
+      return SupportedNS.DotBit;
     case 'Zkns':
-      return SupportedChains.Zkns;
+      return SupportedNS.Zkns;
     case 'ICNS':
-      return SupportedChains.ICNS;
+      return SupportedNS.ICNS;
     case 'StargazeDomains':
-      return SupportedChains.StargazeDomains;
+      return SupportedNS.StargazeDomains;
     case 'Bonfida':
-      return SupportedChains.Bonfida;
+      return SupportedNS.Bonfida;
     case 'SuiNs':
-      return SupportedChains.SuiNs;
+      return SupportedNS.SuiNs;
     case 'AptosNs':
-      return SupportedChains.AptosNs;
+      return SupportedNS.AptosNs;
     default:
-      return SupportedChains.ICNS;
+      return SupportedNS.ICNS;
   }
 }

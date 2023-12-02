@@ -9,7 +9,7 @@ import { getAddressSolana, getNameSolana } from './non-evm/solana';
 import { getAddressStargaze, getNameStargaze } from './non-evm/stargaze';
 import { getAddressSui, getNameSui } from './non-evm/suins';
 import { getAddressSeiNS, getNameSeiNS } from './non-evm/seins';
-import { SupportedChains } from './types';
+import { SupportedNS } from './types';
 import { detectNameService } from './utils/detectNameService';
 import { RPC } from './utils/rpc';
 
@@ -48,8 +48,8 @@ export class DotNamesSDK {
     osmosisRPC = param?.osmosisRPC ? param?.osmosisRPC : RPC.osmosis;
   }
 
-  public async resolveAddress(domainName: string, ns?: SupportedChains) {
-    let service: SupportedChains;
+  public async resolveAddress(domainName: string, ns?: SupportedNS) {
+    let service: SupportedNS;
 
     if (ns) {
       service = ns;
@@ -58,56 +58,56 @@ export class DotNamesSDK {
     }
 
     switch (service) {
-      case SupportedChains.ENS:
+      case SupportedNS.ENS:
         return getAddressENS(domainName, ethRPC);
-      case SupportedChains.SpaceId:
+      case SupportedNS.SpaceId:
         return getAddressSID(domainName, bnbRPC);
-      case SupportedChains.UnstoppableDomains:
+      case SupportedNS.UnstoppableDomains:
         return getAddressResolution(domainName, ethRPC, polygonRPC);
-      case SupportedChains.DotBit:
+      case SupportedNS.DotBit:
         return getAddressDotBit(domainName);
-      case SupportedChains.Zkns:
+      case SupportedNS.Zkns:
         return getAddressZKns(domainName);
-      case SupportedChains.ICNS:
+      case SupportedNS.ICNS:
         return getAddressICNS(domainName, osmosisRPC);
-      case SupportedChains.StargazeDomains:
+      case SupportedNS.StargazeDomains:
         return getAddressStargaze(domainName);
-      case SupportedChains.Bonfida:
+      case SupportedNS.Bonfida:
         return getAddressSolana(domainName);
-      case SupportedChains.SuiNs:
+      case SupportedNS.SuiNs:
         return getAddressSui(domainName, suiRPC);
-      case SupportedChains.AptosNs:
+      case SupportedNS.AptosNs:
         return getAddressAptos(domainName);
-      case SupportedChains.SeiNS:
+      case SupportedNS.SeiNS:
         return getAddressSeiNS(domainName, seiRPC);
       default:
         return 'Not supported name service';
     }
   }
 
-  public async resolveName(address: string, ns: SupportedChains) {
+  public async resolveName(address: string, ns: SupportedNS) {
     switch (ns) {
-      case SupportedChains.ENS:
+      case SupportedNS.ENS:
         return getNameENS(address, ethRPC);
-      case SupportedChains.SpaceId:
+      case SupportedNS.SpaceId:
         return getNameSID(address, bnbRPC);
-      case SupportedChains.UnstoppableDomains:
+      case SupportedNS.UnstoppableDomains:
         return getNameResolution(address, ethRPC, polygonRPC);
-      case SupportedChains.DotBit:
+      case SupportedNS.DotBit:
         return getNameDotBit(address);
-      case SupportedChains.Zkns:
+      case SupportedNS.Zkns:
         return getNameZKns(address);
-      case SupportedChains.ICNS:
+      case SupportedNS.ICNS:
         return getNameICNS(address, osmosisRPC);
-      case SupportedChains.StargazeDomains:
+      case SupportedNS.StargazeDomains:
         return getNameStargaze(address);
-      case SupportedChains.Bonfida:
+      case SupportedNS.Bonfida:
         return getNameSolana(address);
-      case SupportedChains.AptosNs:
+      case SupportedNS.AptosNs:
         return getNameAptos(address);
-      case SupportedChains.SuiNs:
+      case SupportedNS.SuiNs:
         return getNameSui(address, suiRPC);
-      case SupportedChains.SeiNS:
+      case SupportedNS.SeiNS:
         return getNameSeiNS(address, seiRPC);
       default:
         return 'Not supported name service';

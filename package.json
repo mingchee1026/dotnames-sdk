@@ -1,7 +1,7 @@
 {
-  "name": "dotnames-sdk",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@dotnames/dotnamesjs",
+  "version": "0.0.1",
+  "description": "A Universal SDK to resolve names from all blockchainw ",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

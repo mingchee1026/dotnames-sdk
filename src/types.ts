@@ -1,4 +1,4 @@
-export enum SupportedChains {
+export enum SupportedNS {
   ENS = 1,
   SpaceId,
   UnstoppableDomains,
