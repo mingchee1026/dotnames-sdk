@@ -30,17 +30,16 @@ export async function getRecordsSui(domainName: string, fullnode: string) {
       registryAddress,
       [topLevelDomain, domain],
       `${suiNsPackage.PACKAGE_ADDRESS}::domain::Domain`,
-      provider
+      provider,
     );
 
     const fields = parseObjectDataResponse(registryResponse)?.value?.fields || {};
 
-    let records: { address?: string, nftId?: any, records?: any } = {};
+    const records: { address?: string; nftId?: any; records?: any } = {};
 
     if (fields) {
-        records.address = fields.target_address,
-        records.nftId = fields.nft_id;
-        records.records = fields.data?.fields.contents || []
+      (records.address = fields.target_address), (records.nftId = fields.nft_id);
+      records.records = fields.data?.fields.contents || [];
     }
 
     return records;
@@ -62,7 +61,7 @@ export async function getAddressSui(domainName: string, fullnode: string) {
       registryAddress,
       [topLevelDomain, domain],
       `${suiNsPackage.PACKAGE_ADDRESS}::domain::Domain`,
-      provider
+      provider,
     );
     const nameObject = parseRegistryResponse(registryResponse);
 
@@ -77,7 +76,10 @@ export async function getAddressSui(domainName: string, fullnode: string) {
  *
  * @param address a Sui address.
  */
-export async function getNameSui(address: string, fullnode: string): Promise<string | undefined> {
+export async function getNameSui(
+  address: string,
+  fullnode: string,
+): Promise<string | undefined> {
   const connection = new Connection({
     fullnode,
   });
@@ -95,7 +97,7 @@ async function getDynamicFieldObject(
   parentObjectId: SuiAddress,
   key: any,
   type = '0x1::string::String',
-  suiProvider: JsonRpcProvider
+  suiProvider: JsonRpcProvider,
 ) {
   const dynamicFieldObject = await suiProvider.getDynamicFieldObject({
     parentId: parentObjectId,
@@ -119,7 +121,7 @@ const parseRegistryResponse = (response: SuiObjectResponse | undefined): any => 
   const fields = parseObjectDataResponse(response)?.value?.fields || {};
 
   const object = Object.fromEntries(
-    Object.entries({ ...fields }).map(([key, val]) => [camelCase(key), val])
+    Object.entries({ ...fields }).map(([key, val]) => [camelCase(key), val]),
   );
 
   if (response?.data?.objectId) {
@@ -136,10 +138,12 @@ const parseRegistryResponse = (response: SuiObjectResponse | undefined): any => 
       return {
         ...acc,
         [camelCase(key)]:
-          c.type.includes('Address') || key === 'addr' ? normalizeSuiAddress(value) : value,
+          c.type.includes('Address') || key === 'addr'
+            ? normalizeSuiAddress(value)
+            : value,
       };
     },
-    {}
+    {},
   );
 
   return { ...object, ...data };

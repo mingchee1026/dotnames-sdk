@@ -17,5 +17,6 @@
     "stars":        "StargazeDomains",
     "sol":          "Bonfida",
     "sui":          "SuiNs",
-    "apt":          "AptosNs"
+    "apt":          "AptosNs",
+    "sei":          "SeiNS"
 }

@@ -1,19 +1,27 @@
-import { getRecordsENS, getAddressENS, getNameENS } from './evm/ens';
-import { getRecordsSID, getAddressSID, getNameSID } from './evm/sid';
-import { getRecordsResolution, getAddressResolution, getNameResolution } from './evm/resolution';
-import { getRecordsDotBit, getAddressDotBit, getNameDotBit } from './evm/dotbit';
-import { getRecordsZKns, getAddressZKns, getNameZKns } from './evm/zkns';
-import { getRecordsICNS, getAddressICNS, getNameICNS } from './non-evm/icns';
-import { getRecordsSolana, getAddressSolana, getNameSolana } from './non-evm/solana';
-import { getRecordsStargaze, getAddressStargaze, getNameStargaze } from './non-evm/stargaze';
-import { getRecordsSui, getAddressSui, getNameSui } from './non-evm/suins';
-import { getRecordsAptos, getAddressAptos, getNameAptos } from './non-evm/aptosns';
-import { getRecordsSeiNS, getAddressSeiNS, getNameSeiNS } from './non-evm/seins';
+import { getAddressDotBit, getNameDotBit, getRecordsDotBit } from './evm/dotbit';
+import { getAddressENS, getNameENS, getRecordsENS } from './evm/ens';
+import {
+  getAddressResolution,
+  getNameResolution,
+  getRecordsResolution,
+} from './evm/resolution';
+import { getAddressSID, getNameSID, getRecordsSID } from './evm/sid';
+import { getAddressZKns, getNameZKns, getRecordsZKns } from './evm/zkns';
+import { getAddressAptos, getNameAptos, getRecordsAptos } from './non-evm/aptosns';
+import { getAddressICNS, getNameICNS, getRecordsICNS } from './non-evm/icns';
+import { getAddressSeiNS, getNameSeiNS, getRecordsSeiNS } from './non-evm/seins';
+import { getAddressSolana, getNameSolana, getRecordsSolana } from './non-evm/solana';
+import {
+  getAddressStargaze,
+  getNameStargaze,
+  getRecordsStargaze,
+} from './non-evm/stargaze';
+import { getAddressSui, getNameSui, getRecordsSui } from './non-evm/suins';
 import { SupportedNS } from './types';
 import { detectNameService } from './utils/detectNameService';
 import { RPC } from './utils/rpc';
 
-let ethRPC : string;
+let ethRPC: string;
 let polygonRPC: string;
 let bnbRPC: string;
 let suiRPC: string;
@@ -29,7 +37,7 @@ export interface ProviderUrlsProps {
   osmosisRPC?: string;
 }
 
-
+export { SupportedNS };
 export class DotNamesSDK {
   constructor(param?: ProviderUrlsProps) {
     ethRPC = param?.ethRPC ? param?.ethRPC : RPC.eth;
@@ -48,7 +56,7 @@ export class DotNamesSDK {
     osmosisRPC = param?.osmosisRPC ? param?.osmosisRPC : RPC.osmosis;
   }
 
-  public async getRecords(domainName: string, ns?: SupportedNS) {
+  public async getRecords(domainName: string, ns?: SupportedNS): Promise<any> {
     let service: SupportedNS;
 
     if (ns) {
@@ -66,9 +74,9 @@ export class DotNamesSDK {
         return getRecordsResolution(domainName, ethRPC, polygonRPC);
       case SupportedNS.DotBit:
         return getRecordsDotBit(domainName);
-      case SupportedNS.Zkns: // no completed
+      case SupportedNS.Zkns:
         return getRecordsZKns(domainName);
-      case SupportedNS.ICNS: // no completed
+      case SupportedNS.ICNS:
         return getRecordsICNS(domainName, osmosisRPC);
       case SupportedNS.Bonfida:
         return getRecordsSolana(domainName);
@@ -152,11 +160,10 @@ export class DotNamesSDK {
   }
 }
 
-async function main(domainNames: string) {
-    const dotnames = new DotNamesSDK();
-    const records = await dotnames.getRecords(domainNames, SupportedNS.ICNS);
-    console.log(records);
-}
+// async function main(domainNames: string) {
+//   const dotnames = new DotNamesSDK();
+//   const records = await dotnames.getRecords(domainNames, SupportedNS.ICNS);
+//   console.log(records);
+// }
 
-main("dogemos.osmo");
-
+// main('dogemos.osmo');

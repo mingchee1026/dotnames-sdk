@@ -1,34 +1,26 @@
 import { SupportedNS } from '../types';
 import extensionData from './extensionData.json';
 
-const extensionDataUrl = 'https://sow-sdk-support-9gw2zt6e4-0xdead-e0f.vercel.app/api/extension';
-
-function getExtensionFromDomain(domainName: String): String {
+function getExtensionFromDomain(domainName: string): string {
   const extension = domainName.split('.').pop();
   if (!extension) return '';
   return extension.toLowerCase();
 }
 
-async function fetchExtensionData() {
-  try {
-    const response = await fetch(extensionDataUrl);
-    if (response.status !== 200) {
-      return extensionData;
-    }
-    return await response.json();
-  } catch (err) {
-    return extensionData;
-  }
+function fetchExtensionData() {
+  return extensionData;
 }
 
-export async function detectNameService(domainName: String): Promise<SupportedNS> {
+export async function detectNameService(domainName: string): Promise<SupportedNS> {
   const extension = getExtensionFromDomain(domainName).toLowerCase();
   if (extension === '') {
     return SupportedNS.None;
   }
 
-  const extensionMap = await fetchExtensionData();
-  const domainServiceName = extensionMap.hasOwnProperty(extension) ? extensionMap[extension] : null;
+  const extensionMap = fetchExtensionData();
+  const domainServiceName = extensionMap.hasOwnProperty(extension)
+    ? extensionMap[extension as keyof typeof extensionMap]
+    : null;
 
   switch (domainServiceName) {
     case 'ENS':
@@ -51,6 +43,8 @@ export async function detectNameService(domainName: String): Promise<SupportedNS
       return SupportedNS.SuiNs;
     case 'AptosNs':
       return SupportedNS.AptosNs;
+    case 'SeiNS':
+      return SupportedNS.SeiNS;
     default:
       return SupportedNS.ICNS;
   }

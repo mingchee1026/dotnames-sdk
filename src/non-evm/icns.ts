@@ -1,42 +1,52 @@
-import { CosmWasmClient } from "@cosmjs/cosmwasm-stargate";
+import { CosmWasmClient } from '@cosmjs/cosmwasm-stargate';
 
-const resolverAddress = "osmo1xk0s8xgktn9x5vwcgtjdxqzadg88fgn33p8u9cnpdxwemvxscvast52cdd";
+const resolverAddress = 'osmo1xk0s8xgktn9x5vwcgtjdxqzadg88fgn33p8u9cnpdxwemvxscvast52cdd';
 
-export async function getRecordsICNS(domainName: string,osmosisProviderUrl:string) {
-  try{
-      const client = await CosmWasmClient.connect(osmosisProviderUrl);
-      const {bech32_address}= await client.queryContractSmart(resolverAddress, 
-              {
-                  address_by_icns: {
-                      "icns": domainName
-                  }
-              }
-          );
+export async function getRecordsICNS(domainName: string, osmosisProviderUrl: string) {
+  try {
+    const client = await CosmWasmClient.connect(osmosisProviderUrl);
+    const { bech32_address } = await client.queryContractSmart(resolverAddress, {
+      address_by_icns: {
+        icns: domainName,
+      },
+    });
 
-      return bech32_address;
-  } catch(err) {
-    console.log("111111111111 ", err);
-      // throw err;
+    const [, domain, topLevelDomain] = domainName.match(/^(.+)\.([^.]+)$/) || [];
+    const { addresses } = await client.queryContractSmart(resolverAddress, {
+      addresses: {
+        name: domain,
+      },
+    });
+
+    const { admins } = await client.queryContractSmart(resolverAddress, {
+      admin: {},
+    });
+
+    const records = {
+      admins: admins,
+      addresses: addresses,
+      address: bech32_address,
+    };
+
+    return records;
+  } catch (err) {
+    throw err;
   }
-
 }
 
-export async function getAddressICNS(domainName: string,osmosisProviderUrl:string) {
-    try{
-        const client = await CosmWasmClient.connect(osmosisProviderUrl);
-        const {bech32_address}= await client.queryContractSmart(resolverAddress, 
-                {
-                    address_by_icns: {
-                        "icns": domainName
-                    }
-                }
-            );
+export async function getAddressICNS(domainName: string, osmosisProviderUrl: string) {
+  try {
+    const client = await CosmWasmClient.connect(osmosisProviderUrl);
+    const { bech32_address } = await client.queryContractSmart(resolverAddress, {
+      address_by_icns: {
+        icns: domainName,
+      },
+    });
 
-        return bech32_address;
-    } catch(err) {
-        throw err;
-    }
-
+    return bech32_address;
+  } catch (err) {
+    throw err;
+  }
 }
 
 export async function getNameICNS(address: string, osmosisProviderUrl: string) {

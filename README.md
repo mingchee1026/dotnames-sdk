@@ -1,13 +1,13 @@
-# DotNames-Js : A Javascript Library To Resolve Names On All Blockchains
+# DotNames-Js : A Javascript Library To Resolve Domains On All Blockchains
 
 ## Overview of the SDK
 
 ### Installation
 
-Install @dotlabs/dotnamesjs
+Install @dotnames/dotnames-js
 
 ```
-yarn add @dotlabs/dotnamesjs
+npm i @dotnames/dotnames-js
 ```
 
 ### Getting Started
@@ -34,14 +34,15 @@ Setup with custom RPC :
 
 Can be initalized with required selected RPC configuration
 
-### Supported Naming Service
+### Supported Naming Service Types
 
 ```
-import {SupportedNs} from '@dotnames/dotnamesjs'
+import {SupportedNs} from '@dotnames/dotnames-js'
 
 ```
 
-#### Initial Supported Naming Services :   
+#### Supported Naming Services :
+
 ENS,
 UnstoppableDomains
 DotBit,
@@ -51,62 +52,142 @@ StargazeDomains,
 Bonfida,
 SuiNs,
 AptosNs,
-SeiNS,
+DotSeiNS
 
+#### ContentHash Records Supported Domains (Decentralized Websites)
+
+ENS,
+UnstoppableDomains
+DotBit,
+Zkns,
+Bonfida
+
+### Usage :
 
 ### Resolving addresses from names without providing domain name identifier
 
-ENS : 
+ENS :
+
 ```
 const ensAddress = await dotnames.resolveAddress('alice.eth');
 ```
-Unstoppable Domains : 
+
+Unstoppable Domains :
+
 ```
 const udAddress = await dotnames.resolveAddress('alice.crypto');
 ```
-Dotsei Domains: 
+
+Dotsei Domains:
+
 ```
 const seiAddress = await dotnames.resolveAddress('alice.sei');
 ```
-Space Id : 
+
+Space Id :
+
 ```
 const sidAddress = await dotnames.resolveAddress('alice.bnb');
 ```
+
 ### Resolving addresses from names by providing domain name identifier
 
-ENS : 
+ENS :
+
 ```
 const ensAddress = await dotnames.resolveAddress('alice.eth',SupportedNS.ENS);
 ```
-Unstoppable Domains : 
+
+Unstoppable Domains :
+
 ```
 const udAddress = await dotnames.resolveAddress('alice.crypto',SupportedNS.UnstoppableDomains);
 ```
-Dotsei Domains: 
+
+Dotsei Domains:
+
 ```
 const seiAddress = await dotnames.resolveAddress('alice.sei',SupportedNS.SeiNS);
 ```
-Space Id : 
+
+Space Id :
+
 ```
 const sidAddress = await dotnames.resolveAddress('alice.bnb',SupportedNS.SpaceId);
 ```
 
-
 ### Resolving names from addresses
 
-ENS : 
+ENS :
+
 ```
 const ensName = await dotnames.resolveName('//Address', SupportedNS.ENS);
 ```
-Unstoppable Domains : 
+
+Unstoppable Domains :
+
 ```
 const udName = await dotnames.resolveName('//Address', SupportedNS.UnstoppableDomains);
 ```
-Dotsei Domains: 
+
+Dotsei Domains:
+
 ```
 const dotseiName = await dotnames.resolveName('//Address', SupportedNS.SeiNS);
 ```
-Space Id : 
+
+Space Id :
+
 ```
 const sidName = await  dotnames.resolveName('//Address', SupportedNS.SpaceId);
+```
+
+### Resolving Records without providing domain name identifier
+
+```
+const ensRecords = await dotnames.getRecords('alice.eth');
+```
+
+Unstoppable Domains :
+
+```
+const udRecords = await dotnames.getRecords('alice.crypto');
+```
+
+Dotsei Domains:
+
+```
+const seiRecords = await dotnames.getRecords('alice.sei');
+```
+
+Space Id :
+
+```
+const sidRecords = await dotnames.getRecords('alice.bnb');
+```
+
+### Resolving Records by providing domain name identifier
+
+ENS :
+
+```
+const ensRecords = await dotnames.getRecords('alice.eth',SupportedNS.ENS);
+```
+
+Unstoppable Domains :
+
+```
+const udRecords = await dotnames.getRecords('alice.crypto',SupportedNS.UnstoppableDomains);
+```
+
+Dotsei Domains:
+
+```
+const seiRecords = await dotnames.getRecords('alice.sei',SupportedNS.SeiNS);
+```
+
+Space Id :
+
+```
+const sidRecords = await dotnames.getRecords('alice.bnb',SupportedNS.SpaceId);
 ```
