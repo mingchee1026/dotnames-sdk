@@ -1,6 +1,27 @@
 import { createInstance } from 'dotbit';
+import { BitPluginAvatar } from '@dotbit/plugin-avatar'
 
 const dotbit = createInstance();
+
+export async function getRecordsDotBit(domainName: string) {
+    dotbit.installPlugin(new BitPluginAvatar())
+    const avatar = await dotbit.avatar(domainName);
+
+    const records = await dotbit.records(domainName, "avatar");
+
+    const { account_id_hex } = await dotbit.accountInfo(domainName);
+    
+    const contentHash = await dotbit.dweb(domainName);
+
+    const results = {
+        records: records,
+        avatar: avatar?.url,
+        address: account_id_hex,
+        contentHash: contentHash?.value,
+    }
+
+    return results;
+}
 
 export async function getAddressDotBit(domainName: string) {
     const { account_id_hex } = await dotbit.accountInfo(domainName);

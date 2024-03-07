@@ -1,4 +1,14 @@
 
+export async function getRecordsZKns(domainName: string) {
+    try{
+        const response = await fetch(`https://omniapi.zkns.app/domain-resolver/getRecord/${domainName}`);
+        const address = response.text();
+        return address;
+    } catch(err) {
+        throw err;
+    }
+}
+
 export async function getAddressZKns(domainName: string) {
     try{
         const response = await fetch(`https://omniapi.zkns.app/domain-resolver/getRecord/${domainName}`);

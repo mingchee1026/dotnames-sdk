@@ -7,7 +7,8 @@
   "scripts": {
     "test": "jest",
     "prepare": "npm run build",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc & node dist/src/index.js"
   },
   "keywords": [
     "dotnames-sdk",
@@ -27,6 +28,7 @@
   "dependencies": {
     "@bonfida/spl-name-service": "^1.0.6",
     "@cosmjs/cosmwasm-stargate": "^0.28.11",
+    "@dotbit/plugin-avatar": "^0.0.1",
     "@dotnames/dotseijs": "^0.0.1",
     "@ensdomains/ensjs": "^3.0.0-alpha.65",
     "@mysten/sui.js": "^0.37.1",

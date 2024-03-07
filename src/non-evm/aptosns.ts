@@ -1,3 +1,18 @@
+export async function getRecordsAptos(domainName: string) {
+    try{
+        const response = await fetch(`https://www.aptosnames.com/api/mainnet/v1/address/${domainName}`);
+        const address = await response.json();
+        const records = {
+            text: {},
+            address: address,
+            ipfs: undefined,
+        }
+        return records;
+    } catch(err) {
+        throw err;
+    }
+}
+
 export async function getAddressAptos(domainName: string) {
     try{
         const response = await fetch(`https://www.aptosnames.com/api/mainnet/v1/address/${domainName}`);

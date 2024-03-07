@@ -10,6 +10,136 @@ describe('testing detect nameservice function', () => {
   });
 });
 
+describe('testing getRecords function', () => {
+  const dotnames = new DotNamesSDK();
+/*
+  test('Ether Name Service', () => {
+
+    return dotnames.getRecords('vitalik.eth').then((records: any) => {
+      const expected = {
+        text: {
+          avatar: 'eip155:1/erc1155:0xb32979486938aa9694bfc898f35dbed459f44424/10063',
+          url: 'https://vitalik.ca'
+        },
+        address: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
+        contentHash: 'ipfs://QmSJUUQucb2k1XyujefZehKNk6gnk4wdSxwgFGjyJ7fBCT'
+      }
+
+      expect(records).toEqual(expected);
+    });
+  }, 100000);
+
+  test('SpaceID Name Service', () => {
+    return dotnames.getRecords('resolver.bnb', SupportedNS.SpaceId).then((records: any) => {
+      const expected = {
+        text: {},
+        address: '0x3c83efA95B4f7796E74E93e5727908F5a636d3b6',
+        contentHash: ''
+      }
+
+      expect(records).toEqual(expected);
+    });
+  }, 100000);
+
+  test('Unstoppable Domain', () => {
+    return dotnames.getRecords('homecakes.crypto', SupportedNS.UnstoppableDomains).then((records: any) => {
+      const expected = {
+        text: {},
+        address: '0xe7474D07fD2FA286e7e0aa23cd107F8379085037',
+        contentHash: 'QmQ38zzQHVfqMoLWq2VeiMLHHYki9XktzXxLYTWXt8cydu'
+      }
+
+      expect(records).toEqual(expected);
+    });
+  }, 100000);
+ 
+  test('DotBit(Das)', () => {
+    return dotnames.getRecords('code.bit', SupportedNS.DotBit).then((records: any) => {
+        const expected = {
+          records: [],
+          avatar: "https://i.v2ex.co/h2ot4l5W.png",
+          address: '0x527645f22824b0e232edf80413d3775d0d4b02fe',
+          contentHash: 'k51qzi5uqu5dgqjy1i78mz3oumplzt0cye32w9m8ix8hg9chpz5trvj8luwv0c'
+        }
+
+        expect(records).toEqual(expected);
+      });
+  }, 100000);
+
+  test('Bonfida (Solana)', () => {
+    return dotnames.getRecords('bonfida.sol', SupportedNS.Bonfida).then((records: any) => {
+        const expected = {
+          text: {
+            url: 'https://sns.id',
+            discord: 'https://discord.gg/ESZzszuuQh',
+            github: 'https://github.com/Bonfida/',
+            twitter: 'https://twitter.com/bonfida',
+            telegram: 'https://t.me/bonfidatg',
+            pic: 'https://pbs.twimg.com/profile_images/1608753440741642240/IKcnpTnZ_400x400.png'
+          },
+          address: 'HKKp49qGWXd639QsuH7JiLijfVW5UtCVY4s1n2HANwEA',
+          contentHash: undefined
+        }
+  
+        expect(records).toEqual(expected);
+      });
+  }, 100000);
+
+  test('Stargaze Domains (Stargaze Chain)', () => {
+    return dotnames.getRecords('nikan.stars', SupportedNS.StargazeDomains).then((records: any) => {
+      const expected = {
+        address: 'stars1e4pzleql4gm6hngv6dfcu5hla0ettrrxm9zlne',
+        imageNFT: null,
+        records: { telegram: 'nikan_mk' }
+      }
+
+      expect(records).toEqual(expected);
+    });
+  }, 10000);
+
+  test('Sui Name Service', () => {
+    return dotnames.getRecords('coin.sui', SupportedNS.SuiNs).then((records: any) => {
+      const expected = {
+        address: '0xa4c4c40fb38cae294e42bcbf256acea1bbd77d3ea5b21d3cd009b5622e47f392',
+        nftId: '0xc660f34cb50a98c12a98bd4233b713068fde71277a825454abba4fbbeed44fb0',
+        records: []
+      }
+
+      expect(records).toEqual(expected);
+    });
+  }, 5000);
+
+  test('Aptos Name Service', () => {
+    return dotnames.getRecords('test.apt', SupportedNS.AptosNs).then((records: any) => {
+      const expected = {
+        text: {},
+        address: {
+          address: '0xff7d353b9095524e1584479fa87e8af698f75e5b6f38cf1f46bdf0043dfc72e4'
+        },
+        ipfs: undefined
+      }
+
+      expect(records).toEqual(expected);
+    });
+  }, 5000);
+*/
+  test('Sei Name Service', () => {
+    return dotnames.getRecords('123456789.sei', SupportedNS.SeiNS).then((records: any) => {
+      const expected = {
+        address: 'sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24',
+        owner: 'sei1dr94pqt23atf285xvl4c63wvhxaf7mkdjzle24',
+        resolver: 'sei17xd4qyfxwnzylewlr99927h7s48tu80mdm56y9eravpqvsmrml5srrmtty',
+        avatar: 'https://picsum.photos/id/237/200/300'
+      };
+
+      expect(records).toEqual(expected);
+    });
+  }, 2000);
+});
+
+
+
+/*
 describe('testing resolveAddress function', () => {
   const dotnames = new DotNamesSDK();
 
@@ -188,3 +318,4 @@ describe('testing resolveName function', () => {
       });
   }, 10000);
 });
+*/

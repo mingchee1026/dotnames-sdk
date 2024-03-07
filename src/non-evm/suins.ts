@@ -17,6 +17,38 @@ const suiNsPackage = {
   REVERSE_REGISTRY: '0x2fd099e17a292d2bc541df474f9fafa595653848cbabb2d7a4656ec786a1969f',
 };
 
+export async function getRecordsSui(domainName: string, fullnode: string) {
+  try {
+    const connection = new Connection({
+      fullnode,
+    });
+    const provider = new JsonRpcProvider(connection);
+
+    const [, domain, topLevelDomain] = domainName.match(/^(.+)\.([^.]+)$/) || [];
+    const registryAddress = SuiAddress.create(suiNsPackage.REGISTRY);
+    const registryResponse = await getDynamicFieldObject(
+      registryAddress,
+      [topLevelDomain, domain],
+      `${suiNsPackage.PACKAGE_ADDRESS}::domain::Domain`,
+      provider
+    );
+
+    const fields = parseObjectDataResponse(registryResponse)?.value?.fields || {};
+
+    let records: { address?: string, nftId?: any, records?: any } = {};
+
+    if (fields) {
+        records.address = fields.target_address,
+        records.nftId = fields.nft_id;
+        records.records = fields.data?.fields.contents || []
+    }
+
+    return records;
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function getAddressSui(domainName: string, fullnode: string) {
   try {
     const connection = new Connection({
